@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>New Request</title>
+</head>
+
+<body>
+    <form action="{{ url_for('hospitalrequest') }}" method="POST" enctype="multipart/form-data">
+        <input type="text" name="pname" placeholder="Patient name">
+        Blood Group:<br>
+        <label class="rad">A+<input type="radio" value="A+" name="bg" checked><span class="checkmark"></span></label>
+        <label class="rad">A-<input type="radio" value="A-" name="bg"><span class="checkmark"></span></label>
+        <label class="rad">B+<input type="radio" value="B+" name="bg" /><span class="checkmark"></span></label>
+        <label class="rad">AB+<input type="radio" value="AB+" name="bg"><span class="checkmark"></span></label>
+        <label class="rad">AB-<input type="radio" value="AB-" name="bg"><span class="checkmark"></span></label>
+        <label class="rad">B-<input type="radio" value="B-" name="bg" /><span class="checkmark"></span></label>
+        <label class="rad">O+<input type="radio" value="O+" name="bg"><span class="checkmark"></span></label>
+        <label class="rad">O-<input type="radio" value="O-" name="bg"><span class="checkmark"></span></label>
+        <br><br>
+        SOS?<br>
+        <label class="rad">Yes<input type="radio" value="high" name="priority" checked><span class="checkmark"></span></label>
+        <label class="rad">No<input type="radio" value="low" name="priority"><span class="checkmark"></span></label>
+        Blood Camp?<br>
+        <label class="rad">Yes<input type="radio" value="yes" name="blood_camp" checked><span class="checkmark"></span></label>
+        <label class="rad">No<input type="radio" value="no" name="blood_camp"><span class="checkmark"></span></label>
+        <input type="submit" value="Submit">
+      <input type="reset">
+    </form>
+</body>
+
+</html>

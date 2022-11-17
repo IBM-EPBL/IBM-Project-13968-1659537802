@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+   <body>
+        <h2><a href = "\">Go to Home Page</a></h2>
+        <h2><a href = "/hospitalsend">Hospital request</a></h2>
+        <h2><a href = "\logout">Log Out</a></h2>
+        <form action="{{ url_for('hospitaldashboard') }}" method="POST">
+            <table>
+                {% for tuple in item %}
+                <tr>
+                    <td>{{tuple[0]}}</td>
+                    <td>{{tuple[1]}}</td>
+                    <td>{{tuple[2]}}</td>
+                    <td>{{tuple[3]}}</td>
+                    <td>{{tuple[4]}}</td>
+                    <td>{{tuple[5]}}</td>
+                    <td>{{tuple[6]}}</td>
+                    <td>{{tuple[8]}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+    </body>
+</html>

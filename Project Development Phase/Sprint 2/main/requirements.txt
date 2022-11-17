@@ -1,0 +1,4 @@
+Flask
+Flask_Session
+ibm-cos-sdk==2.12.0
+ibm_db

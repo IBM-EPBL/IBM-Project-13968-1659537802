@@ -1,0 +1,102 @@
+import os
+from flask import Flask, render_template, request
+# import sqlite3 as sql
+import ibm_db
+# import getpass
+# import platform
+app = Flask(__name__,template_folder='templates')
+dnName = "sample"
+userid = "db2inst1"
+password = "mypasswd"
+connString = "ATTACH=FALSE"              
+connString += ";DATABASE=" + dnName          
+connString += ";PROTOCOL=TCPIP"
+connString += ";UID=" + userid
+connString += ";PWD=" + password
+con = ibm_db.connect(connString, '', '')
+# con = sql.connect('database.db') 
+with open("mydb.sql") as f:
+    con.executescript(f.read())
+con.close()
+@app.route('/')
+def home():
+    return render_template('Home.html')
+
+@app.route('/enternew')
+def add_new():
+   return render_template('Register.html')
+
+@app.route('/register',methods = ['POST', 'GET'])
+def Register():
+    if request.method == 'POST':
+        con = ibm_db.connect(connString, '', '')
+        # con=sql.connect("database.db")
+        try:
+            nm = request.form['name']
+            dob = request.form['dob']
+            contact = request.form['contactno']
+            email = request.form['email']
+            addr = request.form['addr']
+            city=request.form['city']
+            pin = request.form['pin']
+            password = request.form['pass']
+            password_repeat = request.form['pass-repeat']
+            if(password==password_repeat):
+                cur = con.cursor()
+                cur.execute("INSERT INTO Member (UserName,UserDOB,UserMobile,UserEmailId,UserAddress,UserCity,UserPincode,UserPass) VALUES (?,?,?,?,?,?,?,?)",(nm,dob,contact,email,addr,city,pin,password) )
+                con.commit()
+                msg = "Name "+nm+"/n"+"Password "+password+"/n"+"Pin"+pin+"Record successfully added"
+
+        except:
+            con.rollback()
+            msg = "Error Pls Try Again"
+        finally:
+            return render_template("Home.html",msg = msg)
+            #con.close()
+
+@app.route('/list')
+def list():
+#    con = sql.connect("database.db")
+   con = ibm_db.connect(connString, '', '')
+#    con.row_factory = sql.Row
+   
+   cur = con.cursor()
+   cur.execute("select * from Member")
+   
+   rows = cur.fetchall();
+   rows=dict(rows)
+   return render_template("database_details.html",rows = rows)
+
+@app.route('/check')
+def check():
+   return render_template('Login.html')
+
+@app.route('/login',methods = ['POST', 'GET'])
+def Login():
+    UserEmail = request.form['email']
+    Password = request.form['pass']
+    # con = sql.connect("database.db")
+    con = ibm_db.connect(connString, '', '')
+    # con.row_factory = sql.Row
+    cur = con.cursor()
+    statement = f"SELECT * from Member WHERE UserEmailId='{UserEmail}' AND UserPass = '{Password}';"
+    cur.execute(statement)
+    if not cur.fetchone():  
+        print("Login failed")
+        return render_template('Register.html')
+    else:
+        cur.close()
+        con.close()
+        # con = sql.connect("database.db")
+        con = ibm_db.connect(connString, '', '')
+        # con.row_factory = sql.Row
+   
+        cur = con.cursor()
+        cur.execute(f"select * from Member WHERE UserEmailId='{UserEmail}' AND UserPass = '{Password}'")
+        rows = cur.fetchall();
+        rows=dict(rows)
+        return render_template('dashboard.html',rows=rows)
+
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)

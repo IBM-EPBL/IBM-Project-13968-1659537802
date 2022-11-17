@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+   <body>
+   
+      <table border = 1>
+         <thead>
+            <td>UserName</td>
+            <td>DOB</td>
+            <td>Contact</td>
+            <td>Email</td>
+            <td>Address</td>
+            <td>City</td>
+            <td>Pin</td>
+            <td>Password</td>
+            <td>Date of Joining</td>
+         </thead>
+         
+         {% for row in rows %}
+            <tr>
+               <td>{{row["UserName"]}}</td>
+               <td>{{row["UserDOB"]}}</td>
+               <td>{{row["UserMobile"]}}</td>
+               <td>{{row["UserEmailId"]}}</td>
+               <td>{{row["UserAddress"]}}</td>
+               <td>{{row["UserCity"]}}</td>
+               <td>{{row["UserPincode"]}}</td>
+               <td> {{ row["UserPass"]}}</td>
+               <td>{{row["Joined"]}}</td>	
+            </tr>
+         {% endfor %}
+      </table>
+      
+      <a href = "/">Go back to home page</a>
+      
+   </body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <script>
+        function ageCalculator() {
+            var userinput = document.getElementById("dob").value;
+            var dob = new Date(userinput);
+            if (userinput == null || userinput == '') {
+                document.getElementById("message").innerHTML = "**Choose a date please!";
+                return false;
+            } else {
+
+                var month_diff = Date.now() - dob.getTime();
+
+                var age_dt = new Date(month_diff);
+
+                var year = age_dt.getUTCFullYear();
+
+                var age = Math.abs(year - 1970);
+
+                if (age < 18) {
+                    document.getElementById("result").innerHTML = "Not eligible to register since age < 18\nage=" + age;
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+        }
+
+        function passwordChanged() {
+            var strength = document.getElementById('strength');
+            var strongRegex = new RegExp("(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})", "g");
+            var enoughRegex = new RegExp("(?=.{8,}).*", "g");
+            var pwd = document.getElementById("pass");
+            if (pwd.value.length == 0) {
+                strength.innerHTML = ''; return false;
+            } else if (strongRegex.test(pwd.value)) {
+                strength.innerHTML = '<span style="color:green">Strong!</span>'; return true;
+            } else {
+                strength.innerHTML = '<span style="color:red">Weak!</span>'; return false;
+            }
+        }
+
+        function checkPass() {
+            var pwd = document.getElementById("pass").value;
+            var rpwd = document.getElementById("rpass").value;
+            var cpass = document.getElementById("cpass");
+            if (pwd == rpwd) {
+                cpass.innerHTML = '';
+                return true;
+            }
+            else {
+                cpass.innerHTML = '<span style="color:red">Passwords don`t match!</span>';
+                return false;
+            }
+        }
+
+        function verify(){
+            if (ageCalculator()&&passwordChanged()&&checkPass()){
+                alert("Success!");
+            }
+            else{
+                alert("Check conditions!");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="header">
+        <h1>VAST</h1>
+    </div><br>
+    <div class="signup">
+        <form action="{{ url_for('register') }}" method="POST">
+            <input type="text" id="name" name="name" pattern="[A-Za-z ]+" placeholder="Name" required>
+            <input type="date" id="dob" name="dob" onblur="ageCalculator()" placeholder="Date of birth" required>
+            <div id="result" style="text-align: center;"></div>
+            <input type="tel" id="contactno" name="contactno" pattern="[0-9]{8,10}" placeholder="Phone number" required>
+            <input type="text" id="email" name="email" placeholder="email" required>
+            <input type name="addr" id="addr" placeholder="Address">
+            <input type name="city" id="city" placeholder="City">
+            <input type="zip" id="pin" placeholder="PIN code" name="pin" pattern="[0-9]*" oninvalid="pinInvalid()"
+                required>
+            <input id="pass" type="password" placeholder="Enter Password" name="pass"
+                onkeyup="passwordChanged();checkPass();" required />
+            <div id="strength"></div>
+            <input id=rpass type="password" placeholder="Repeat Password" name="pass-repeat"
+                onkeyup="return checkPass();" required />
+            <div id="cpass"></div>
+            <button onclick="verify();">Sign up</button>
+        </form>
+        <a href="/check">
+            <button id="login">Log in</button></a>
+    </div>
+</body>
+
+</html>
