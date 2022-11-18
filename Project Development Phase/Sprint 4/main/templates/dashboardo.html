@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+
+<body>
+    Welcome mr:{{msg}} <h2></h2>
+    Phone No:{{msgg}}
+    <h2><a href="\">Go to Home Page</a></h2>
+    <h2><a href="\check">Go to Login</a></h2>
+    <h2><a href="\addnew">Go to Register</a></h2>
+    <h2><a href="/elig">Update Eligibibilty</a></h2>
+    <h2><a href="\logout">Log Out</a></h2>
+    <form action="{{ url_for('approved') }}" method="POST">
+        <input type="date" name="dondate" placeholder="Date of donation" required>
+        <table>
+            {% for tuple in items %}
+            <tr>
+                <td>{{tuple[3]}}</td>
+                <td>{{tuple[5]}}</td>
+                <td>{{tuple[6]}}</td>
+                <td>{{tuple[7]}}</td>
+                <td><button type="submit" name="chec" value="{{tuple[0]}}">Accept</button></td>
+            </tr>
+            {% endfor %}
+        </table>
+        {{mssgg}}
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<html>
+
+<head>
+    <title>Donate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylen.css') }}">
+</head>
+<style>
+    a:visited {
+        color: #848697;
+    }
+
+    a {
+        color: #848697;
+        text-decoration: none;
+    }
+</style>
+
+<body>
+    <div class="center">
+        <div class="left">
+            <div class="logo">
+                <img src="{{url_for('static', filename='6.png')}}" height="100" width="100">
+            </div>
+            <div class="company">
+                <div class="company-name">Plasma donor Application</div>
+                <div class="company-description">Donate plasma, save lives</div>
+            </div>
+            <div class="navigation">
+                <ul>
+                    <a href="\dashboard">
+                        <li><i class="material-symbols-outlined">home</i><span>Home</span></li>
+                    </a>
+                    <a href="#">
+                        <li style="color: blue;"> <i class="material-symbols-outlined">bloodtype</i><span>Donate</span>
+                        </li>
+                    </a>
+                    <a href="\health"><li> <i class="material-symbols-outlined">medical_information</i><span>Health Card</span></li></a>
+                    <a href="\logout"><li><i class="material-symbols-outlined">logout</i><span>Log Out</span></li></a>
+
+                </ul>
+            </div>
+        </div>
+        <div class="right">
+            <div class="title">Available Requests</div>
+            <br><br>
+            <span class="remove" onclick="rem('SOS','r1')"><i
+                    class="material-symbols-outlined">e911_emergency</i>Emergency Requests
+                <i id="r1" class="material-symbols-outlined">expand_less</i></span>
+                <form action="{{ url_for('approved') }}" method="POST">
+            <div id="SOS"><br><br>
+                <input type="date" name="dondate" placeholder="Date of donation" required>
+                <table>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Hospital Name</th>
+                        <th>Hospital Location</th>
+                        <th>Accept/deny</th>
+                    </tr>
+                    <br><br>{% for i in items %}
+                    <tr>
+                        <td>{{i[7]}}</td>
+                        <td>{{i[3]}}</td>
+                        <td>{{i[4]}}</td>
+                        <td><button type="submit" name="chec" value="{{i[0]}}">Accept</button></td>
+                    </tr>{% endfor %}
+                </table>
+            </div></form>
+
+            <br><br>
+            <span class="remove1" onclick="rem('req','r2')"><i
+                    class="material-symbols-outlined">medication_liquid</i>Other Requests
+                <i id="r2" class="material-symbols-outlined">expand_less</i></span>
+            <div id="req"><br><br>
+                <form action="{{ url_for('approved') }}" method="POST">
+                <input type="date" name="dondate" placeholder="Date of donation" required>
+                <table>
+                    <tr>
+                        <th>Patient Name</th>
+                        <th>Hospital Name</th>
+                        <th>Hospital Location</th>
+                        <th>Accept/deny</th>
+                    </tr>
+                    <br><br>{% for i in item %}
+                    <tr>
+                        <td>{{i[7]}}</td>
+                        <td>{{i[3]}}</td>
+                        <td>{{i[4]}}</td>
+                        <td><button type="submit" name="chec" value="{{i[0]}}">Accept</button></td>
+                    </tr>{% endfor %}
+                </table>
+            </div></form>
+            <br><br>
+            <span class="remove2" onclick="rem('cam','r3')"><i class="material-symbols-outlined">campaign</i>Blood Camps
+                <i id="r3" class="material-symbols-outlined">expand_less</i></span>
+            <div id="cam"><br><br>
+                <form action="{{ url_for('locate') }}" method="POST">
+                <table>
+                    <tr>
+                        <th>Camp name</th>
+                        <th>Organised by</th>
+                        <th>Address</th>
+                        <th>Location</th>
+                    </tr>
+                    <br><br>{% for i in ite %}
+                    <tr>
+                        <td>{{i[7]}}</td>
+                        <td>{{i[3]}}</td>
+                        <td>{{i[4]}}</td>
+                        <td><button type ="submit" name="map" style="color:blue" value="{{i[0]}}"><i class="material-symbols-outlined">near_me</i></a></td>
+                    </tr>{% endfor %}
+                </table></form>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    function rem(y, z) {
+        var x = document.getElementById(y);
+        var a = document.getElementById(z)
+        if (!(x.style.display == "none"))
+            x.style.display = "none";
+        else
+            x.style.display = "block";
+        if ((a.innerHTML == "expand_less"))
+            a.innerHTML = "expand_more";
+        else
+            a.innerHTML = "expand_less";
+    }
+</script>
+
+</html>

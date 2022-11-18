@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_16f378264a229216ada0cfc1728d6c90 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_16f378264a229216ada0cfc1728d6c90" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_16f378264a229216ada0cfc1728d6c90 = L.map(
+                "map_16f378264a229216ada0cfc1728d6c90",
+                {
+                    center: [-10.56149795, 49.45970645],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 11,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_22cb44e10e9b0191a4df236bf985c361 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_16f378264a229216ada0cfc1728d6c90);
+        
+    
+            var marker_81d5e07e47456da14aa96ea2f3e7ddb6 = L.marker(
+                [-34.2107959, 18.6409129],
+                {"radius": 50}
+            ).addTo(map_16f378264a229216ada0cfc1728d6c90);
+        
+    
+        var popup_7aa129517fafb1cf97e15ed0fe14a9e3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_b2efdf9c7d72cdf609ba07764103e104 = $(`<div id="html_b2efdf9c7d72cdf609ba07764103e104" style="width: 100.0%; height: 100.0%;">False Bay, South Africa</div>`)[0];
+                popup_7aa129517fafb1cf97e15ed0fe14a9e3.setContent(html_b2efdf9c7d72cdf609ba07764103e104);
+            
+        
+
+        marker_81d5e07e47456da14aa96ea2f3e7ddb6.bindPopup(popup_7aa129517fafb1cf97e15ed0fe14a9e3)
+        ;
+
+        
+    
+    
+            marker_81d5e07e47456da14aa96ea2f3e7ddb6.bindTooltip(
+                `<div>
+                     You need to go here
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var marker_7674a80790208a378111def0957cf604 = L.marker(
+                [13.0878, 80.2785],
+                {"radius": 50}
+            ).addTo(map_16f378264a229216ada0cfc1728d6c90);
+        
+    
+        var popup_30cf0e99ea2e662b1437d4f23b23e122 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_e3877cef0f5b4b31e6802f736b3000dc = $(`<div id="html_e3877cef0f5b4b31e6802f736b3000dc" style="width: 100.0%; height: 100.0%;"><stong>You are here</stong></div>`)[0];
+                popup_30cf0e99ea2e662b1437d4f23b23e122.setContent(html_e3877cef0f5b4b31e6802f736b3000dc);
+            
+        
+
+        marker_7674a80790208a378111def0957cf604.bindPopup(popup_30cf0e99ea2e662b1437d4f23b23e122)
+        ;
+
+        
+    
+    
+            marker_7674a80790208a378111def0957cf604.bindTooltip(
+                `<div>
+                     You are here
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>

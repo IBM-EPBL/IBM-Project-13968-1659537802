@@ -1,0 +1,279 @@
+<html>
+
+<head>
+  <title>Health Card</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style2.css') }}">
+</head>
+<style>
+  .rad {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  /* Hide the browser's default radio button */
+  .rad input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #ddd;
+    border-radius: 50%;
+  }
+
+  /* On mouse-over, add a grey background color */
+  .rad:hover input~.checkmark {
+    background-color: #ccc;
+  }
+
+  /* When the radio button is checked, add a blue background */
+  .rad input:checked~.checkmark {
+    background-color: #2196F3;
+  }
+
+  input[type=text],
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    color: azure;
+    background-color: transparent;
+    border: 1px solid rgb(201, 192, 192);
+    border-radius: 4px;
+    resize: vertical;
+  }
+
+  input[type=email],
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    color: azure;
+    background-color: transparent;
+    border: 1px solid rgb(200, 191, 191);
+    border-radius: 4px;
+    resize: vertical;
+  }
+
+  input[type=number],
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px;
+    color: azure;
+    background-color: transparent;
+    border: 1px solid rgb(200, 191, 191);
+    border-radius: 4px;
+    resize: vertical;
+  }
+
+  label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+  }
+
+  input[type=submit] {
+    background-color: rgb(0, 0, 0);
+    color: beige;
+    padding: 12px 20px;
+    border: 1px solid #45a049;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+  }
+
+  input[type=submit]:hover {
+    background-color: #45a049;
+    border: none;
+  }
+
+  input[type=reset] {
+    background-color: rgb(0, 0, 0);
+    color: beige;
+    padding: 12px 20px;
+    border: 1px solid #e48204;
+    border-radius: 4px;
+    cursor: pointer;
+    float: left;
+  }
+
+  input[type=reset]:hover {
+    background-color: #e45700;
+    border: none;
+  }
+
+  input[type=date] {
+    background-color: azure;
+    width: 15%;
+    border-radius: 10%;
+    color: black;
+    border: none;
+    padding: 12px 20px;
+  }
+
+  select,
+  textarea {
+    background-color: transparent;
+    color: aliceblue;
+  }
+
+  option {
+    color: aliceblue;
+    background-color: black;
+    line-height: 8px;
+    font-size: medium;
+  }
+
+  .droptarget {
+    float: left;
+    width: 100px;
+    height: max-content;
+    background-color: #45a049;
+    margin: 15px;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+  }
+
+  .dropsrc {
+    float: left;
+    width: 100px;
+    height: max-content;
+    background-color: rgb(32, 10, 96);
+    border-radius: 5px;
+    margin: 15px;
+    padding: 10px;
+    border: 1px solid #aaaaaa;
+  }
+
+  .container {
+    border-radius: 5px;
+    background-color: rgba(10, 4, 58, 0.5);
+    transition: all 4s ease;
+
+    padding: 20px;
+  }
+</style>
+
+<body style="text-align: left;font-size:large;font-family:Arial, Helvetica, sans-serif;">
+
+
+  <h1 style="font-size: 50px;color: azure;">Health Card</h1>
+
+  <div class="container">
+    <form action="{{ url_for('eligibilty') }}" method="POST" enctype="multipart/form-data">
+
+      <h2>These details are recorded and user can view them from their dashboard. All the data are secured and privacy
+        is assured</h2>
+      Gender:<br><br>
+      <label class="rad">male<input type="radio" value="male" name="gender" checked><span
+          class="checkmark"></span></label>
+      <label class="rad">female<input type="radio" value="female" name="gender"><span class="checkmark"></span></label>
+      <label class="rad">other<input type="radio" value="other" name="gender" /><span class="checkmark"></span></label>
+      <br><br><br>
+      Blood Group:<br><br>
+      <label class="rad">A+<input type="radio" value="A+" name="bg" checked><span class="checkmark"></span></label>
+      <label class="rad">A-<input type="radio" value="A-" name="bg"><span class="checkmark"></span></label>
+      <label class="rad">B+<input type="radio" value="B+" name="bg" /><span class="checkmark"></span></label>
+      <label class="rad">AB+<input type="radio" value="AB+" name="bg"><span class="checkmark"></span></label>
+      <label class="rad">AB-<input type="radio" value="AB-" name="bg"><span class="checkmark"></span></label>
+      <label class="rad">B-<input type="radio" value="B-" name="bg" /><span class="checkmark"></span></label>
+      <label class="rad">O+<input type="radio" value="O+" name="bg"><span class="checkmark"></span></label>
+      <label class="rad">O-<input type="radio" value="O-" name="bg"><span class="checkmark"></span></label>
+      <br><br><br>
+      <label>Weight in kg</label>
+      <input style="width: fit-content;" type="number" name="weight" placeholder="Enter Weight...">
+
+      <label>&nbsp &nbsp &nbsp &nbsp Height in cm</label>
+      <input style="width: fit-content;" type="number" name="height" placeholder="Enter Height...">
+      <br><br><br>
+      Do you have cholestorol?<br>
+      <label>Yes<input type="radio" id="cchk" name="cchk" value="Yes" onclick="td('chol')" checked> </label>
+      <label>No<input type="radio" id="cchk" name="cchk" value="No"onclick="hd('chol')"></label>
+      <br><br>
+      <container id="chol">
+        <label>Enter Cholestrol: </label>
+        <input style="width: fit-content;display: block;" type="number" name="chol"
+          placeholder="Enter Cholesterol value...">
+      </container>
+      <br><br>
+
+      <label>Blood Pressure: </label>
+      <input type="number" name="bp" placeholder="Enter BP...." style="width: fit-content;display: block">
+      <br><br>
+      <br><br>Have you donated blood?
+      <br><br>
+      <label>Yes<input type="radio" id="bchk" name="bchk" value="Yes" onclick="td('blood')" checked> </label>
+      <label>No<input type="radio" id="bchk" name="bchk" value="No" onclick="hd('blood')"></label>
+      <br><br>
+      <container id="blood">
+        <label>Last Date of Blood Donation:</label><br>
+        <input name="blood" type="date" value="NULL" placeholder="Enter Date">
+        <br>
+        <label>Blood Donation Certificate:(optional)</label> <input type="file" name="certi" accept=".pdf" /> 
+        <br><br>
+      </container>
+
+      <label>In the last six months have you had any of the following?</label>
+      <br>
+      <label>Tatooing<input type="checkbox" name="check1" value="Tatooing"></label><br>
+      <label> Ear Piercing <input type="checkbox" name="check1" value="Ear_Piercing"></label><br>
+      <label>Dental Extraction<input type="checkbox" name="check1" value="Dental_Extraction"></label><br>
+<br>
+      <label>Is there any history of surgery or blood transfusion in the past six months?</label>
+      <br>
+      <label>Antibiotics<input type="checkbox" name="check2" value="Antibiotics"></label><br>
+      <label> Steroids <input type="checkbox" name="check2" value="Steroids"></label><br>
+      <label>Aspirin<input type="checkbox" name="check2" value="Aspirin"></label><br>
+      <label>Vaccinations<input type="checkbox" name="check2" value="Vaccinations"></label><br>
+      <label> Alcohol <input type="checkbox" name="check2" value="Alcohol"></label><br>
+      <label>Dog bite Rabies vaccine (1 year)<input type="checkbox" name="check2" value="Rabies"></label><br>
+<br><br>
+<label>Is there any history of surgery or blood transfusion in the past six months?</label>
+<br>
+<label>Major<input type="checkbox" name="check3" value="Major"></label><br>
+<label>Minor<input type="checkbox" name="check3" value="Minor"></label><br>
+<label>Blood Transfusion<input type="checkbox" name="check3" value="Blood Transfusion"></label><br>
+      <input type="submit" value="Skip/Submit">
+      <input type="reset">
+
+    </form>
+  </div>
+  <script type="text/javascript">
+    function alphanumeric(ele) {
+      var data = ele.value;
+      var pattern = /^[a-zA-Z0-9\n]*$/;
+      if (!pattern.test(data)) {
+        alert("text area alpha numeric only");
+      }
+    }
+    function td(y) {
+      var x = document.getElementById(y);
+      x.style.display = "block";
+
+    }
+    function hd(y) {
+      var x = document.getElementById(y);
+
+      x.style.display = "none";
+    }
+  </script>
+</body>
+
+</html>

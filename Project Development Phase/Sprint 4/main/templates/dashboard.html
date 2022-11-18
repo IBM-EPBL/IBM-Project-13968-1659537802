@@ -1,0 +1,240 @@
+<html>
+<head>
+  <title>Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/stylen.css') }}">
+
+</head>
+<style>
+  .navigation a:visited{
+    color:#848697;
+  }
+  .navigation a{
+    color: #848697;
+    text-decoration: none;
+  }
+</style>
+<body>
+  <!-- partial:index.partial.html -->
+  <div class="center">
+    <div class="left">
+      <div class="logo">
+        <img src="{{url_for('static', filename='6.png')}}" height="100" width="100">
+      </div>
+      <div class="company">
+        <div class="company-name">Plasma donor Application</div>
+        <div class="company-description">Donate plasma, save lives</div>
+      </div>
+      <div class="navigation">
+        <ul>
+          <a href="#"><li style="color: blue;"><i class="material-symbols-outlined">home</i><span>Home</span></li></a>
+          <a href="\donate"><li> <i class="material-symbols-outlined">bloodtype</i><span>Donate</span></li></a>
+          <a href="\health"> <li> <i class="material-symbols-outlined">medical_information</i><span>Health Card</span></li></a>
+          <a href="\logout"><li> <i class="material-symbols-outlined">logout</i><span>Log Out</span></li></a>
+
+        </ul>
+      </div>
+    </div>
+    <div class="right">
+      <div class="title">Dashboard</div>
+      <div class="row">
+        <div class="graph">
+          <!--  -->
+          <div class="stock">
+          <div class="stock-logo archileon"><i class="material-symbols-outlined">schedule</i></div>
+              <div class="stock-name">Accepted Donation</div>
+              <br>
+            </div>
+            <br>
+            &nbsp;  Patient Name: {{pa_name}}<br><br>
+            &nbsp;  Hospital Name: {{hosp_na}}<br><br>
+            &nbsp;  Hospital address: {{hosp_id}}<br><br><a href="#" style="float:right;color:blue"><i class="material-symbols-outlined">near_me</i></a><br>
+            
+        </div>
+       
+        <div class="graph">
+          <!--  -->
+          <div class="stock">
+            <div class="stock-logo paperpillar"><i class="material-symbols-outlined">event_available</i></div>
+            <div class="stock-info"><br><br><br><br><br>
+              <div class="stock-name">Quick Eligibiity Check </div>
+              <br>
+              <div class="stock-fullname">Enter last donation date</div>
+              <br>
+              <input id="date" type="date">
+              <button onclick="check()">Check</button>
+              <p id="elg"></p>
+            </div>
+          </div>
+        </div>
+         <div class="graph">
+          <!--  -->
+          <div class="stock">
+          <div class="stock-logo dandruft"><i class="material-symbols-outlined">humidity_high</i></div>
+              <div class="stock-name">Your Blood Group</div>
+              <br>
+            </div>
+            <br>
+            <div class="card3"><b>{{bg}}</b></div>
+            
+        </div>
+        
+        <div class="graph">
+          <!--  -->
+          <div class="stock">
+            <div class="stock-logo sappunu"><i class="material-symbols-outlined">heart_plus</i></div>
+                <div class="stock-name">Recent Donations</div>
+              </div>
+              <br>
+              <div class="card4"><b><br>{{bdd}}</b></div>
+        </div>
+        
+      </div>
+      <div class="title" style="font: size 50px;">Factos</div>
+          <div class="slideshow-container" style="text-align:center">
+
+            <div class="mySlides fade">
+              <div class="numbertext">1 / 5</div>
+              <img src="{{url_for('static', filename='1.png')}}" style="width:50%">
+
+            </div>
+
+            <div class="mySlides fade">
+              <div class="numbertext">2 / 5</div>
+              <img src="{{url_for('static', filename='2.png')}}" style="width:50%">
+            </div>
+
+            <div class="mySlides fade">
+              <div class="numbertext">3 / 5</div>
+              <img src="{{url_for('static', filename='3.png')}}" style="width:50%">
+            </div>
+
+            <div class="mySlides fade">
+              <div class="numbertext">4 / 5</div>
+              <img src="{{url_for('static', filename='4.png')}}" style="width:50%">
+            </div>
+
+            <div class="mySlides fade">
+              <div class="numbertext">5 / 5</div>
+              <img src="{{url_for('static', filename='5.png')}}" style="width:50%;">
+
+              <!-- <button style="float:inline-end;background-color: #f44336;color: rgb(255, 255, 255);">SOS</button> -->
+
+            </div>
+          </div>
+
+          <a class="prev" onclick="plusSlides(-1)"> prev
+          </a>
+          <a class="next" onclick="plusSlides(1)">next</a>
+
+
+          <br>
+          <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+            <br>
+            <br>
+            <br>
+            <br>
+            In lieu of public awareness and service<br><br>
+            Brought to you by: Varun Abhishek Srivishnu Thushita
+          </div>
+        
+        
+     </div>
+  </div>
+  
+</body>
+  <script>
+    function check() {
+      var userinput = document.getElementById("date").value;
+      var dob = new Date(userinput);
+      if (userinput == null || userinput == '') {
+        document.getElementById("elg").innerHTML = "Choose a date please!";
+        return false;
+      } else {
+
+        var months;
+        d2 = new Date(Date.now())
+        d1 = dob
+        months = (d2.getUTCFullYear() - d1.getUTCFullYear()) * 12;
+        months -= d1.getMonth();
+        months += d2.getMonth();
+
+        // var month_diff = Date.now() - dob.getTime();
+
+        // var age_dt = new Date(month_diff);
+
+        // var year = age_dt.getUTCFullYear();
+
+        // var age = year - 1970;
+
+        if (months < 3) {
+
+          months = 3 - months;
+          document.getElementById("elg").innerHTML = "Eligible to donate after: " + months + " months";
+          return false;
+        }
+        else {
+          document.getElementById("elg").innerHTML = "You are Eligible to donate!!";
+          return true;
+        }
+      }
+    }
+
+   let slideIndex = 1;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+
+  }
+
+  function autosl() {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) { slideIndex = 1 }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+    setTimeout(autosl, 10000); // Change image every 10 seconds
+  }
+  autosl();
+</script>
+
+
+</html>
